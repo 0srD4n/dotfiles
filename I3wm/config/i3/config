@@ -1,0 +1,381 @@
+#i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+#
+# Konfigurasi ini menggunakan keycodes (bindsym) dan ditulis untuk layout QWERTY.
+#
+# Untuk mendapatkan file konfigurasi dengan posisi tombol yang sama, tetapi untuk layout Anda saat ini,
+# gunakan i3-config-wizard
+
+# $modkey untuk ALT dan Mod4 untuk Winkey
+set $modkey Mod4
+
+# Font untuk judul jendela. Juga akan digunakan oleh bar kecuali font yang berbeda
+# digunakan dalam blok bar {} di bawah ini.
+font pango: Hack bold 10
+
+# Font ini banyak diinstal, menyediakan banyak glyph unicode, rendering teks dari kanan ke kiri
+# dan skalabilitas pada tampilan retina/hidpi (berkat pango).
+#font pango:DejaVu Sans Mono 8
+
+# Sebelum i3 v4.8, kami biasa merekomendasikan ini sebagai default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# Font di atas sangat hemat ruang, artinya terlihat bagus, tajam dan
+# jelas dalam ukuran kecil. Namun, cakupan glyph unicodenya terbatas, rendering font inti X lama
+# tidak mendukung dari kanan ke kiri dan karena ini adalah font bitmap,
+# tidak berskala pada tampilan retina/hidpi.
+
+# Gunakan tombol ini untuk fokus, gerakan, dan arah ubah ukuran saat menjangkau
+# panah tidak nyaman
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+# Gunakan Mouse+$modkey untuk menyeret jendela mengambang ke posisi yang diinginkan
+floating_modifier $modkey
+
+# Mulai terminal
+bindsym $modkey+Return exec --no-startup-id konsole
+
+# Tutup jendela yang difokuskan
+bindsym $modkey+Shift+q kill
+
+# Mulai dmenu (peluncur program)
+bindsym $modkey+d exec --no-startup-id rofi -show drun -show-icons
+# bindsym $modkey+d exec --no-startup-id dmenu_run
+
+# Ada juga i3-dmenu-desktop (baru) yang hanya menampilkan aplikasi
+# yang memiliki file .desktop. Ini adalah wrapper di sekitar dmenu, jadi Anda membutuhkannya
+# terpasang.
+# bindsym $modkey+d exec --no-startup-id --no-startup-id i3-dmenu-desktop
+
+# Ubah fokus
+bindsym $modkey+$left focus left
+bindsym $modkey+$down focus down
+bindsym $modkey+$up focus up
+bindsym $modkey+$right focus right
+
+# Atau, Anda dapat menggunakan tombol kursor:
+bindsym $modkey+Left focus left
+bindsym $modkey+Down focus down
+bindsym $modkey+Up focus up
+bindsym $modkey+Right focus right
+
+# Pindahkan jendela yang difokuskan
+bindsym $modkey+Shift+$left move left
+bindsym $modkey+Shift+$down move down
+bindsym $modkey+Shift+$up move up
+bindsym $modkey+Shift+$right move right
+
+# Atau, Anda dapat menggunakan tombol kursor:
+bindsym $modkey+Shift+Left move left
+bindsym $modkey+Shift+Down move down
+bindsym $modkey+Shift+Up move up
+bindsym $modkey+Shift+Right move right
+
+# Pisahkan dalam orientasi horizontal
+bindsym $modkey+h split h
+
+# Pisahkan dalam orientasi vertikal
+bindsym $modkey+v split v
+
+# Masuk ke mode layar penuh untuk kontainer yang difokuskan
+bindsym $modkey+f fullscreen toggle
+
+# Ubah tata letak kontainer (bertumpuk, tab, alihkan pemisahan)
+bindsym $modkey+s layout stacking
+bindsym $modkey+w layout tabbed
+bindsym $modkey+e layout toggle split
+
+# Alihkan ubin / mengambang
+bindsym $modkey+Shift+space floating toggle
+
+# Ubah fokus antara jendela ubin / mengambang
+bindsym $modkey+space focus mode_toggle
+
+# Fokuskan kontainer induk
+bindsym $modkey+a focus parent
+
+# Fokuskan kontainer anak
+#bindsym $modkey+d focus child
+
+# Pindahkan jendela yang saat ini difokuskan ke scratchpad
+bindsym $modkey+Shift+minus move scratchpad
+
+# Tampilkan jendela scratchpad berikutnya atau sembunyikan jendela scratchpad yang difokuskan.
+# Jika ada beberapa jendela scratchpad, perintah ini akan mengulangi semuanya.
+bindsym $modkey+minus scratchpad show
+
+# Aktifkan bagian di bawah ini untuk mengambil semua warna dari Xresources
+#set_from_resource $xforeground foreground
+#set_from_resource $xbackground background
+#set_from_resource $xcursor cursorColor
+#set_from_resource $xcolor0 color0
+#set_from_resource $xcolor8 color8
+#set_from_resource $xcolor1 color1
+#set_from_resource $xcolor9 color9
+#set_from_resource $xcolor2 color2
+#set_from_resource $xcolor10 color10
+#set_from_resource $xcolor3 color3
+#set_from_resource $xcolor11 color11
+#set_from_resource $xcolor4 color4
+#set_from_resource $xcolor12 color12
+#set_from_resource $xcolor5 color5
+#set_from_resource $xcolor13 color13
+#set_from_resource $xcolor6 color6
+#set_from_resource $xcolor14 color14
+#set_from_resource $xcolor7 color7
+#set_from_resource $xcolor15 color15
+
+# Pengaturan warna manual.
+# Tema merah
+#set $xforeground #c5c8c6
+#set $xbackground #1d1f21
+#set $xcursor #c5c8c6
+#set $xcolor0 #282a2e
+#set $xcolor8 #373b41
+#set $xcolor1 #a54242
+#set $xcolor9 #cc6666
+#set $xcolor2 #8c9440
+#set $xcolor10 #b5bd68
+#set $xcolor3 #de935f
+#set $xcolor11 #f0c674
+#set $xcolor4 #5f819d
+#set $xcolor12 #81a2be
+#set $xcolor5 #85678f
+#set $xcolor13 #b294bb
+#set $xcolor6 #5e8d87
+#set $xcolor14 #8abeb7
+#set $xcolor7 #707880
+#set $xcolor15 #c5c8c6
+# Tema biru
+set $xforeground #c5c8c6
+set $xbackground #1d1f21
+set $xcursor #c5c8c6
+set $xcolor0 #0d3264
+set $xcolor8 #373b41
+set $xcolor1 #467ecb
+set $xcolor9 #cc6666
+set $xcolor2 #8c9440
+set $xcolor10 #b5bd68
+set $xcolor3 #de935f
+set $xcolor11 #f0c674
+set $xcolor4 #5f819d
+set $xcolor12 #81a2be
+set $xcolor5 #85678f
+set $xcolor13 #b294bb
+set $xcolor6 #6298e0
+set $xcolor14 #8abeb7
+set $xcolor7 #707880
+set $xcolor15 #c5c8c6
+
+# Warna
+# Kelas                 border          backgr      text            indic
+client.focused          $xcolor6       $xcolor1     $xbackground   $xcolor7
+client.focused_inactive $xcolor6       $xcolor0     $xcolor14
+client.unfocused        $xcolor6       $xcolor0     $xcolor14
+client.urgent           $xbackground   $xcolor9     $xbackground
+client.placeholder      $xcolor7       $xcolor7     $xcolor14
+
+# Tentukan nama untuk ruang kerja default yang kita konfigurasikan pengikatan tombolnya nanti.
+# Kami menggunakan variabel untuk menghindari pengulangan nama di beberapa tempat.
+set $ws1 "1:I"
+set $ws2 "2:II"
+set $ws3 "3:III"
+set $ws4 "4:IV"
+set $ws5 "5:V"
+set $ws6 "6:VI"
+set $ws7 "7:VII"
+set $ws8 "8:VIII"
+set $ws9 "9:IX"
+set $ws10 "10:X"
+
+# Beralih ke ruang kerja
+bindsym $modkey+1 workspace $ws1
+bindsym $modkey+2 workspace $ws2
+bindsym $modkey+3 workspace $ws3
+bindsym $modkey+4 workspace $ws4
+bindsym $modkey+5 workspace $ws5
+bindsym $modkey+6 workspace $ws6
+bindsym $modkey+7 workspace $ws7
+bindsym $modkey+8 workspace $ws8
+bindsym $modkey+9 workspace $ws9
+bindsym $modkey+0 workspace $ws10
+# Kunci layar dengan xpldan
+bindsym $mod+shift+x exec betterlockscreen -l dim
+# Pindahkan kontainer yang difokuskan ke ruang kerja
+bindsym $modkey+Shift+1 move container to workspace $ws1
+bindsym $modkey+Shift+2 move container to workspace $ws2
+bindsym $modkey+Shift+3 move container to workspace $ws3
+bindsym $modkey+Shift+4 move container to workspace $ws4
+bindsym $modkey+Shift+5 move container to workspace $ws5
+bindsym $modkey+Shift+6 move container to workspace $ws6
+bindsym $modkey+Shift+7 move container to workspace $ws7
+bindsym $modkey+Shift+8 move container to workspace $ws8
+bindsym $modkey+Shift+9 move container to workspace $ws9
+bindsym $modkey+Shift+0 move container to workspace $ws10
+
+# Muat ulang file konfigurasi
+bindsym $modkey+Shift+c reload
+
+# Mulai ulang i3 di tempat (mempertahankan tata letak/sesi Anda, dapat digunakan untuk memutakhirkan i3)
+bindsym $modkey+Shift+r restart
+
+# Keluar dari i3 (mengeluarkan Anda dari sesi X Anda) | Perubahan dilakukan di sini.
+#bindsym $modkey+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Anda menekan pintasan keluar. Apakah Anda benar-benar ingin keluar dari i3? Ini akan mengakhiri sesi X Anda.' -b 'Ya, keluar i3' 'i3-msg exit'"
+
+# Ubah ukuran jendela (Anda juga dapat menggunakan mouse untuk itu)
+mode "resize" {
+    # Pengikatan ini dipicu segera setelah Anda memasuki mode ubah ukuran
+
+    # Menekan kiri akan memperkecil lebar jendela.
+    # Menekan kanan akan memperbesar lebar jendela.
+    # Menekan atas akan memperkecil tinggi jendela.
+    # Menekan bawah akan memperbesar tinggi jendela.
+    bindsym $left       resize shrink width 12 px or 12 ppt
+    bindsym $down       resize grow height 12 px or 12 ppt
+    bindsym $up         resize shrink height 12 px or 12 ppt
+    bindsym $right      resize grow width 12 px or 12 ppt
+
+    # Pengikatan yang sama, tetapi untuk tombol panah
+    bindsym Left        resize shrink width 12 px or 12 ppt
+    bindsym Down        resize grow height 12 px or 12 ppt
+    bindsym Up          resize shrink height 12 px or 12 ppt
+    bindsym Right       resize grow width 12 px or 12 ppt
+
+    bindsym $modkey+$left       resize shrink width 01 px or 01 ppt
+    bindsym $modkey+$down       resize grow height 01 px or 01 ppt
+    bindsym $modkey+$up         resize shrink height 01 px or 01 ppt
+    bindsym $modkey+$right      resize grow width 01 px or 01 ppt
+
+    bindsym $modkey+Left        resize shrink width 01 px or 01 ppt
+    bindsym $modkey+Down        resize grow height 01 px or 01 ppt
+    bindsym $modkey+Up          resize shrink height 01 px or 01 ppt
+    bindsym $modkey+Right       resize grow width 01 px or 01 ppt
+
+    # Kembali ke normal: Enter atau Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $modkey+r mode "resize"
+
+# Mulai i3bar untuk menampilkan bilah ruang kerja (ditambah informasi sistem i3status
+# temukan, jika tersedia)
+bar {
+    status_command i3status-rs ~/.dantca-conf/i3status-conf/config.toml
+    tray_output primary
+    mode dock
+    position top
+    strip_workspace_numbers yes
+    font pango: Hack Bold 10
+    separator_symbol ")("
+
+    colors {
+        #Where      #Color
+        background  $xbackground
+        statusline  $xforeground
+
+        #Where              #Border         #Background     #Text
+        focused_workspace   $xbackground    $xcolor1        $xbackground
+        #urgent_workspace    $xbackground    $xcolor9        $xbackground
+        urgent_workspace    $xbackground    $xcolor1        $xbackground
+        inactive_workspace  $xbackground    $xcolor0        $xforeground
+    }
+}
+
+# Alihkan bilah
+bindsym $modkey+m bar mode toggle
+
+# Kembali dan maju saat menekan pengikatan tombol ruang kerja yang sama
+workspace_auto_back_and_forth yes
+
+# Tampilkan pemberitahuan mendesak di jendela
+force_display_urgency_hint 500 ms
+
+# Konfigurasi pengunci
+set $Locker i3lock -d -c $black0 -f
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (b) off-screen
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym b exec --no-startup-id sleep 1 && xset dpms force off, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $modkey+Shift+e mode "$mode_system"
+
+# Misc (above)
+new_window pixel 4
+
+# Floating dialogs
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# i3-gaps configuration
+gaps inner 10
+gaps outer 0
+smart_gaps on
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $modkey+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
+
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+    bindsym plus  gaps outer current plus 5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     gaps outer current set 0
+
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+######################################################################
+# automatically start i3-config-wizard to offer the user to create a
+# keysym-based config which used their favorite modifier (alt or windows)
+#
+# i3-config-wizard will not launch if there already is a config file
+# in ~/.i3/config.
+#
+# Please remove the following exec line:
+#######################################################################
+#exec --no-startup-id hyperlock
+#exec --no-startup-id
+#exec --no-startup-id betterlockscreen -w dim
+#exec --no-startup-id source ~/.fehbg
+#
+#exec --no-startup-id i3-config-wizard
+#exec --no-startup-id picom --config ~/.config/picom/picom.conf
+#exec --no-startup-id picom --config ~/.config/picom/picom.conf 

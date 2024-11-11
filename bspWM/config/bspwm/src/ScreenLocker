@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Temporary image untuk i3lock
+TEMP_IMAGE="/tmp/i3lock.jpg"
+
+# Warna-warna yang digunakan
+bg=282a36
+fg=f8f8f2
+ring=bd93f9
+wrong=ff5555
+date=f8f8f2
+verify=50fa7b
+
+default_lockscreen () {
+    # Mengambil screenshot dengan delay 0.3 detik
+    maim -d 0.3 -u ${TEMP_IMAGE}
+    # Memberikan efek blur
+    magick $TEMP_IMAGE -blur 8x6 $TEMP_IMAGE
+    i3lock -n --force-clock -i $TEMP_IMAGE -e --indicator \
+        --radius=25 --ring-width=50 --inside-color=$bg \
+        --ring-color=$ring --insidever-color=$verify --ringver-color=$verify \
+        --insidewrong-color=$wrong --ringwrong-color=$wrong --line-uses-inside \
+        --keyhl-color=$verify --separator-color=$verify --bshl-color=$verify \
+        --time-str="%H:%M" --time-size=100 --date-str="%A, %d %B" \
+        --date-size=35 --verif-text="Memverifikasi..." --wrong-text="Password Salah!" \
+        --noinput-text="" --greeter-text="Masukkan Password" --ind-pos="683:450" \
+        --time-font="JetBrainsMono NF:style=Bold" --date-font="JetBrainsMono NF" --verif-font="JetBrainsMono NF" \
+        --greeter-font="JetBrainsMono NF" --wrong-font="JetBrainsMono NF" --verif-size=20 \
+        --greeter-size=20 --wrong-size=20 --time-pos="683:300" \
+        --date-pos="683:350" --greeter-pos="683:580" --wrong-pos="683:620" \
+        --verif-pos="683:500" --date-color=$date --time-color=$date \
+        --greeter-color=$fg --wrong-color=$wrong --verif-color=$verify \
+        --pointer=default --refresh-rate=0 \
+        --pass-media-keys --pass-volume-keys
+
+}
+
+rice_lockscreen () {
+    # Membaca tema rice yang aktif
+    read -r RICE < "$HOME"/.config/bspwm/.rice
+    # Direktori wallpaper
+    image_dir="/home/whoami/background_live/"
+
+    # Memilih gambar secara random
+    lock_image=$(find "$image_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1)
+
+    # Konversi jika format webp
+    if [[ "$lock_image" == *.webp ]]; then
+        magick "$lock_image" "$TEMP_IMAGE" || exit 1
+    else
+        cp "$lock_image" "$TEMP_IMAGE"
+    fi
+
+    # Resize gambar agar sesuai dengan resolusi
+    magick "$TEMP_IMAGE" -resize 1366x768! "$TEMP_IMAGE"
+
+    i3lock -n --force-clock -i $TEMP_IMAGE -e --indicator \
+        --radius=25 --ring-width=50 --inside-color=$bg \
+        --ring-color=$ring --insidever-color=$verify --ringver-color=$verify \
+        --insidewrong-color=$wrong --ringwrong-color=$wrong --line-uses-inside \
+        --keyhl-color=$verify --separator-color=$verify --bshl-color=$verify \
+        --time-str="%H:%M" --time-size=100 --date-str="%A, %d %B" \
+        --date-size=35 --verif-text="Memverifikasi..." --wrong-text="Password Salah!" \
+        --noinput-text="" --greeter-text="Masukkan Password ! you can crack it?" --ind-pos="683:450" \
+        --time-font="JetBrainsMono NF:style=Bold" --date-font="JetBrainsMono NF" --verif-font="JetBrainsMono NF" \
+        --greeter-font="JetBrainsMono NF" --wrong-font="JetBrainsMono NF" --verif-size=20 \
+        --greeter-size=20 --wrong-size=20 --time-pos="683:300" \
+        --date-pos="683:350" --greeter-pos="683:580" --wrong-pos="683:620" \
+        --verif-pos="683:500" --date-color=$date --time-color=$date \
+        --greeter-color=$fg --wrong-color=$wrong --verif-color=$verify \
+        --pointer=default --refresh-rate=0 \
+        --pass-media-keys --pass-volume-keys
+}
+
+case $1 in
+    -r|--rice)
+        rice_lockscreen;;
+    -h|--help)
+        echo -e "ScreenLocker [options]
+Catatan: Jika tidak ada opsi yang ditentukan, layar akan terkunci dengan screenshot dan efek blur.
+
+Opsi:
+    [-r] [--rice]    Mengatur screen locker dengan wallpaper acak dari tema saat ini.\n";;
+    *)
+        default_lockscreen;;
+esac
